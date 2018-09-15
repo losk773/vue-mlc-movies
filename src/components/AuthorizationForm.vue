@@ -1,21 +1,54 @@
 <template>
   <form class="login-form">
       <div class="login-form__field login-form__field_login">
-        <input type="text" class="login-form__input" placeholder="Login">
+        <input v-model="inputData.login"
+               type="text" 
+               class="login-form__input" 
+               placeholder="Login">
       </div>
       <div class="login-form__field login-form__field_password">
-        <input type="password" class="login-form__input" placeholder="Password">
+        <input v-model="inputData.password"
+               type="password"
+               class="login-form__input"
+               placeholder="Password">
       </div>
-        <button type="button" class="login-form__submit">Sign in</button>
+      <div v-if="wrongPassword"
+           class="login-form__notice">
+        Неверный пароль или логин
+      </div>
+      <button @click="authorization(inputData)"
+              type="button" 
+              class="login-form__submit">
+        Sign in
+      </button>
   </form>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
-import {mapMutations} from 'vuex';
+import {mapActions} from 'vuex';
 
 export default {
+  data(){
+    return {
+      inputData: {
+        login: '',
+        password: '',
+      }
+    }
+  },
+  computed: {
+    ...mapGetters('auth', [
+      'user',
+      'wrongPassword'
+    ])
+  },
+  methods:{
+    ...mapActions('auth', [
+      'authorization'
+    ])
   
+  }
 }
 </script>
 
@@ -106,6 +139,15 @@ export default {
     &:hover {
       background-color: #a92929;
     }
+  }
+  &__notice {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 20px;
+    background-color: #dc5555;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 3px;
   }
 }
 </style>

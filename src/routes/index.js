@@ -8,7 +8,8 @@ import Welcome from '../components/Welcome';
 import Movie from '../components/Movie';
 import MovieList from '../components/MovieList';
 
-const routes = [{
+const routes = [
+  {
     path: '',
     redirect: {
       name: 'home'
@@ -18,16 +19,20 @@ const routes = [{
     name: 'home',
     path: '/home',
     component: Home,
-    children: [{
-      name: 'movies',
-      path: 'movies',
-      component: MovieList,
-      children: [{
-        name: 'movie',
-        path: 'movie',
-        component: Movie
-      }]
-    }]
+    children: [
+      {
+        name: 'movies',
+        path: 'movies',
+        component: MovieList,
+        children: [
+          {
+            name: 'movie',
+            path: 'movie',
+            component: Movie
+          }
+        ]
+      }
+    ]
   },
   {
     name: 'welcome',

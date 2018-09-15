@@ -2,8 +2,21 @@
   <router-view></router-view>
 </template>
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  
+  created() {
+    if(!this.isAuthorized) {
+      this.$router.push('/login')
+    } else {
+      this.$router.push('/home')
+    }
+  },
+  computed: {
+    ...mapGetters('auth', [
+      'isAuthorized'
+    ])
+  }
 }
 </script>
 <style>
