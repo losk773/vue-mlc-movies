@@ -2,12 +2,8 @@
   <router-view></router-view>
 </template>
 <script>
-import Welcome from './components/Welcome'
-
 export default {
-  components: {
-    Welcome
-  }
+  
 }
 </script>
 <style>
@@ -17,6 +13,5 @@ export default {
 body {
   font-family: 'Montserrat', sans-serif;
 }
-
 </style>
 
