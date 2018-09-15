@@ -6,11 +6,14 @@
       <div class="login-form__field login-form__field_password">
         <input type="password" class="login-form__input" placeholder="Password">
       </div>
-        <button class="login-form__submit">Sign in</button>
+        <button type="button" class="login-form__submit">Sign in</button>
   </form>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+import {mapMutations} from 'vuex';
+
 export default {
   
 }
@@ -18,14 +21,14 @@ export default {
 
 <style lang="scss" scoped>
 .login-form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   width: 400px;
+  margin-right: auto;
+  margin-left: auto;
   padding: 35px 25px;
   border-radius: 5px;
   overflow: hidden;
+  z-index: 1;
   &:before {
     content: '';
     position: absolute;
