@@ -1,22 +1,15 @@
 import { router } from '../../routes';
+import { AUTH_DATA } from '../../mocks';
 
 export default {
   namespaced: true,
   state: {
-    isAuthorized: true,
+    token: localStorage.getItem('token') || '',
     wrongPassword: false,
-    user: {
-      id: 1,
-      login: 'losk773',
-      password: '123'
-    }
   },
   getters: {
     isAuthorized: (state) => {
-      return state.isAuthorized;
-    },
-    user: (state) => {
-      return state.user;
+      return !!state.token;
     },
     wrongPassword: (state) => {
       return state.wrongPassword;
@@ -24,19 +17,26 @@ export default {
     
   },
   mutations: {
-    authorization: (state, payload) => {
-      if(state.user.login === payload.login && state.user.password === payload.password) {
-        state.isAuthorized = true;
-        state.wrongPassword = false;
-        router.push({name: 'home'});
-      } else {
-        state.wrongPassword = true;
-      }
+    authSuccess: (state, payload) => {
+      state.token = payload.token;
+      state.wrongPassword = false
+    },
+    authError: (state) => {
+      state.wrongPassword = true;
     }
   },
   actions: {
-    authorization: (store, payload) => {
-      store.commit('authorization', payload);
+    authorization: ({commit}, payload) => {
+      setTimeout(() => {
+        if(AUTH_DATA.login === payload.login && AUTH_DATA.password === payload.password) {
+          localStorage.setItem('token', AUTH_DATA.token);
+          commit('authSuccess', {token: AUTH_DATA.token});
+          router.push({name: 'home'});
+        } else {
+          commit('authError');
+          localStorage.removeItem('token');
+        }
+      }, 1000);
     }
   }
 }

@@ -1,44 +1,55 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { store } from '../store';
 
 Vue.use(VueRouter);
 
 import Home from '../components/Home';
 import Welcome from '../components/Welcome';
 import Movie from '../components/Movie';
-import MovieList from '../components/MovieList';
+
+const isAuth = (to, from, next) => {
+  if (store.getters['auth/isAuthorized']) {
+    next();
+    return;
+  }
+  next({name: 'login'} );
+};
+
+const isNotAuth = (to, from, next) => {
+  if (!store.getters['auth/isAuthorized']) {
+    next();
+    return;
+  }
+  next({name: 'home'} );
+};
 
 const routes = [
+  { 
+    path: '/', 
+    redirect: { name: 'home' }
+  },
   {
-    path: '',
-    redirect: {
-      name: 'home'
-    }
+    name: 'login',
+    path: '/login',
+    component: Welcome,
+    beforeEnter: isNotAuth
   },
   {
     name: 'home',
     path: '/home',
     component: Home,
+    beforeEnter: isAuth,
     children: [
       {
-        name: 'movies',
-        path: 'movies',
-        component: MovieList,
-        children: [
-          {
-            name: 'movie',
-            path: 'movie',
-            component: Movie
-          }
-        ]
+        name: 'movie',
+        path: 'movie/:id',
+        component: Movie,
+        props: true
       }
     ]
-  },
-  {
-    name: 'welcome',
-    path: '/login',
-    component: Welcome
   }
+  
 ];
 
 export const router = new VueRouter({

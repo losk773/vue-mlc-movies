@@ -1,26 +1,25 @@
 <template>
-  <form class="login-form">
+  <form class="login-form" 
+        @submit.prevent="authorization(inputData)">
       <div class="login-form__field login-form__field_login">
         <input v-model="inputData.login"
                type="text" 
                class="login-form__input" 
-               placeholder="Login">
+               placeholder="Login"
+               required>
       </div>
       <div class="login-form__field login-form__field_password">
         <input v-model="inputData.password"
                type="password"
                class="login-form__input"
-               placeholder="Password">
+               placeholder="Password"
+               required>
       </div>
-      <div v-if="wrongPassword"
+      <div v-if="wrongPassword" 
            class="login-form__notice">
         Неверный пароль или логин
       </div>
-      <button @click="authorization(inputData)"
-              type="button" 
-              class="login-form__submit">
-        Sign in
-      </button>
+      <button class="login-form__submit">Sign in</button>
   </form>
 </template>
 
@@ -39,7 +38,6 @@ export default {
   },
   computed: {
     ...mapGetters('auth', [
-      'user',
       'wrongPassword'
     ])
   },

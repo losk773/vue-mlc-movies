@@ -2,7 +2,7 @@
   <div class="welcome">
     <div class="welcome__box">
       <img src="../assets/logo.png" class="welcome__logo" alt="My lovely movie">
-      <authorization-form></authorization-form>
+      <AuthorizationForm></AuthorizationForm>
     </div>
   </div>  
 </template>
@@ -17,8 +17,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Monoton');
-@import url('https://fonts.googleapis.com/css?family=Fascinate+Inline');
 .welcome {
   position: relative;
   height: 100vh;
