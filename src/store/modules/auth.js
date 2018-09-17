@@ -31,7 +31,7 @@ export default {
         if(AUTH_DATA.login === payload.login && AUTH_DATA.password === payload.password) {
           localStorage.setItem('token', AUTH_DATA.token);
           commit('authSuccess', {token: AUTH_DATA.token});
-          router.push({name: 'home'});
+          router.push('/home');
         } else {
           commit('authError');
           localStorage.removeItem('token');

@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 <script>
 export default {
@@ -10,6 +12,7 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&subset=latin-ext');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+html,
 body {
   font-family: 'Montserrat', sans-serif;
 }

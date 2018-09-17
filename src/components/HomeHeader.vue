@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__thumb">
-      <router-link :to='{name: "home"}'>
+      <router-link :to='"/home"'>
         <img src="../assets/logo_white.png" class="header__logo" alt="My lovely menu">
       </router-link>
     </div>

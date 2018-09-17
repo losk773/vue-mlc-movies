@@ -7,13 +7,14 @@ Vue.use(VueRouter);
 import Home from '../components/Home';
 import Welcome from '../components/Welcome';
 import Movie from '../components/Movie';
+import MovieGrid from '../components/MovieGrid';
 
 const isAuth = (to, from, next) => {
   if (store.getters['auth/isAuthorized']) {
     next();
     return;
   }
-  next({name: 'login'} );
+  next('/login');
 };
 
 const isNotAuth = (to, from, next) => {
@@ -21,28 +22,29 @@ const isNotAuth = (to, from, next) => {
     next();
     return;
   }
-  next({name: 'home'} );
+  next('/home');
 };
 
 const routes = [
   { 
     path: '/', 
-    redirect: { name: 'home' }
+    redirect: '/home'
   },
   {
-    name: 'login',
     path: '/login',
     component: Welcome,
     beforeEnter: isNotAuth
   },
   {
-    name: 'home',
     path: '/home',
     component: Home,
     beforeEnter: isAuth,
     children: [
       {
-        name: 'movie',
+        path: '/',
+        component: MovieGrid
+      },
+      {
         path: 'movie/:id',
         component: Movie,
         props: true
