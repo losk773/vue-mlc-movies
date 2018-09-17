@@ -5,9 +5,9 @@ import { store } from '../store';
 Vue.use(VueRouter);
 
 import Home from '../components/Home';
-import Welcome from '../components/Welcome';
+import Login from '../components/Login';
 import Movie from '../components/Movie';
-import MovieGrid from '../components/MovieGrid';
+import MovieList from '../components/MovieList';
 
 const isAuth = (to, from, next) => {
   if (store.getters['auth/isAuthorized']) {
@@ -32,7 +32,7 @@ const routes = [
   },
   {
     path: '/login',
-    component: Welcome,
+    component: Login,
     beforeEnter: isNotAuth
   },
   {
@@ -42,7 +42,7 @@ const routes = [
     children: [
       {
         path: '/',
-        component: MovieGrid
+        component: MovieList
       },
       {
         path: 'movie/:id',
