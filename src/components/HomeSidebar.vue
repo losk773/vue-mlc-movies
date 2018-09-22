@@ -48,6 +48,18 @@ export default {
   &__inner {
     padding: 60px 25px;
     height: 100%;
+    overflow-y: auto;
+    &::-webkit-scrollbar-track { 
+      background-color:#dddddd;
+    } 
+
+    &::-webkit-scrollbar-thumb { 
+      background-color: #acacac;
+      transition: all .4s;
+    }   
+    &::-webkit-scrollbar{ 
+      width: 10px; 
+    }
   }
   &__toggle {
     position: absolute;
