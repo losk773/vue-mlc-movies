@@ -1,7 +1,7 @@
 <template>
-  <div class="welcome">
-    <div class="welcome__box">
-      <img src="../assets/logo.png" class="welcome__logo" alt="My lovely movie">
+  <div class="authorization">
+    <div class="authorization__box">
+      <img src="../assets/logo.png" class="authorization__logo" alt="My lovely movie">
       <login-form></login-form>
     </div>
   </div>  
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.welcome {
+.authorization {
   position: relative;
   height: 100vh;
   background: url(../assets/cover.jpg) center center no-repeat;
