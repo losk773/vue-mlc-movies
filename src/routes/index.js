@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 
 import Home from '../components/Home';
 import Login from '../components/Login';
+import Welcome from '../components/Welcome';
 import Movie from '../components/Movie';
 import MovieList from '../components/MovieList';
 
@@ -42,9 +43,16 @@ const routes = [
     children: [
       {
         path: '/',
-        component: MovieList
+        component: Welcome
       },
       {
+        name: 'movies',
+        path: 'movies/:nameGenres/:idGenres',
+        component: MovieList,
+        props: true
+      },
+      {
+        name: 'movie',
         path: 'movie/:id',
         component: Movie,
         props: true

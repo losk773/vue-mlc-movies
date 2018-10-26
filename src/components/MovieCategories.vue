@@ -2,22 +2,34 @@
 <div class="movie-categories">
   <h2 class="movie-categories__title">Categories</h2>
   <ul class="movie-categories__list">
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Horrors">Horrors</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Popular 250">Popular 250</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Comedy">Comedy</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Serials">Serials</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Fantastic">Fantastic</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Horrors">Horrors</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Popular 250">Popular 250</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Comedy">Comedy</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Serials">Serials</a></li>
-    <li class="movie-categories__item"><a class="movie-categories__link" href="#" data-hover="Fantastic">Fantastic</a></li>
+    <router-link v-for="item in genres"
+                 :to="{ name: 'movies', params: { idGenres: item.id, nameGenres: item.name.toLowerCase() } }"
+                 :key="item.id"
+                 tag="li"
+                 class="movie-categories__item"
+                 active-class="movie-categories__item_active"
+    >
+      <a class="movie-categories__link" :data-hover="item.name">{{ item.name  }}</a>
+    </router-link>
   </ul>
 </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+
 export default {
-  
+  computed: {
+    ...mapGetters('movies', [ 'genres' ])
+  },
+  methods: {
+    ...mapActions('movies', {
+      getGenres: 'getGenres'
+    })
+  },
+  mounted() {
+    this.getGenres();
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -33,14 +45,22 @@ export default {
     color: #ffffff;
   }
   &__item {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &_active {
+      a {
+        color: #ffffff;
+      }
+    }
   }
   &__link {
     position: relative;
     display: block;
     color: #797979;
-    font-weight: 400;
-    font-size: 18px;
+    font-weight: 300;
+    font-size: 14px;
     &:before {
       content: attr(data-hover);
       position: absolute;
