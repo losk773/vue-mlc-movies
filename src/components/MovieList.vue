@@ -1,30 +1,40 @@
 <template>
-<div class="movies">
-  <h1 class="movies__title">{{ nameGenres | capitalize }}</h1>
-  <div class="movies__grid">
-    <div  v-for="movie in moviesList"
-          :key="movie.id"
-          class="movie">
-      <img :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path"
-           class="movie__poster" 
-           :alt="movie.title">
-      <h2 class="movie__title">{{ movie.title }}</h2>
-      <p class="movie__desc">{{ movie.overview | truncate }}</p>
+
+<div :class="['movies', {'movies_loading': loading}]">
+  <spinner v-if="loading"></spinner>
+  <template v-else>
+    <h2 class="movies__title">Categories>{{ nameGenres | capitalize }}</h2>
+    <div class="movies__grid">
+      <div  v-for="movie in moviesList"
+            :key="movie.id"
+            class="movie">
+        <img :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path"
+            class="movie__poster" 
+            :alt="movie.title">
+        <h3 class="movie__title">{{ movie.title }}</h3>
+        <p class="movie__desc">{{ movie.overview | truncate }}</p>
+      </div>
     </div>
-  </div>
+  </template>
 </div>
 </template>
 <script>
+
+import Spinner from './Spinner';
+
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 
 export default {
+  components: {
+    Spinner
+  },
   props: [
     'idGenres', 
     'nameGenres'
   ],
   computed: {
-    ...mapGetters('movies', ['moviesList'])
+    ...mapGetters('movies', ['moviesList', 'loading'])
   },
   methods: {
     ...mapActions('movies', ['getMoviesInGenres'])
@@ -54,23 +64,34 @@ export default {
 .movies {
   &__grid {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
   }
+  &.movies_loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 }
+
 .movie {
-  width: 20%;
+  width: 300px;
   margin-bottom: 30px;
-  &__title {
+
+  .movie__title {
+    margin: 10px 0;
     font-weight: 500;
     font-size: 18px;
   }
-  &__desc {
+
+  .movie__desc {
     font-weight: 400;
     font-size: 14px;
     line-height: 22px;
   }
-  &__poster {
+
+  .movie__poster {
     max-width: 100%;
   }
 }

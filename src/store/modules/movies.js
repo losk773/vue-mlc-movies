@@ -5,6 +5,7 @@ export default {
   state: {
     apiKey: '5d78da0983a3a7993b6640b921785bb2',
     status: '',
+    loading: false,
     genres: null,
     moviesList: null
   },
@@ -20,20 +21,22 @@ export default {
     },
     moviesList: (state) => {
       return state.moviesList;
+    },
+    loading: (state) => {
+      return state.loading;
     }
   },
   mutations: {
     moviesRequest: (state) => {
       state.status = 'loading...';
-      console.log(state.status);
+      state.loading = true;
     },
     moviesSuccess: (state) => {
       state.status = 'OK';
-      console.log(state.status);
+      state.loading = false;
     },
     moviesError: (state) => {
       state.status = 'Error!!!!';
-      console.log(state.status);
     },
     createdGenres: (state, payload) => {
       state.genres = [...payload];
@@ -44,13 +47,11 @@ export default {
   },
   actions: {
     getGenres: ({ commit, state }) => {
-      commit('moviesRequest');
       axios
         .get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${state.apiKey}&language=en-US`)
         .then(resp => { 
           commit('createdGenres', resp.data.genres);
          })
-        .then(() => commit('moviesSuccess'))
         .catch(() => commit('moviesError'))
     },
     getMoviesInGenres: ({ commit, state }, payload) => {
