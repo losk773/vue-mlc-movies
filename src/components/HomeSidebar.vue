@@ -45,6 +45,14 @@ export default {
     background: #000;
     opacity: .8;
   }
+  &_top {
+    top: 0;
+    padding: 0;
+    
+    .sidebar__toggle {
+      top: 20px;
+    }
+  }
   &__inner {
     padding: 60px 25px;
     height: 100%;
@@ -63,7 +71,7 @@ export default {
   }
   &__toggle {
     position: absolute;
-    top: 10px;
+    top: 75px;
     left: 100%;
     right: auto;
     width: 35px;

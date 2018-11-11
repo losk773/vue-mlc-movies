@@ -1,10 +1,10 @@
 <template>
   <div>
-    <home-header></home-header>
+    <home-header :class="{'header_close': hide}"></home-header>
     <div :class="['wrapper', { 'wrapper_sidebar_on': isOpenSidebar }]">
       <home-sidebar @toggle="open"
                     :isOpenSidebar="isOpenSidebar"
-                    class="wrapper__sidebar">
+                    :class="['wrapper__sidebar', {'sidebar_top': hide}]">
       </home-sidebar>
       <router-view class="wrapper__content"></router-view>
     </div>
@@ -18,15 +18,27 @@ export default {
   components: { HomeHeader, HomeSidebar },
   data() {
     return {
-      isOpenSidebar: false
+      isOpenSidebar: false,
+      scrollTop: null,
+      heightHeader: 55
+    }
+  },
+  computed: {
+    hide() {
+      return this.scrollTop > this.heightHeader ? true : false;
     }
   },
   methods: {
     open() {
       this.isOpenSidebar = !this.isOpenSidebar;
+    },
+    scrolled() {
+      this.scrollTop = window.scrollY;
     }
   },
-  created() {
+  mounted() {
+    window.addEventListener('scroll', this.scrolled);
+    
     setTimeout(() => {
       this.isOpenSidebar = true;
     }, 0);
@@ -38,15 +50,17 @@ export default {
   transition: all .5s;
   &__sidebar {
     position: fixed;
-    top: 55px;
+    padding-top: 55px;
+    top: 0;
     left: 0;
     bottom: 0;
+    z-index: 1;
     transform: translateX(-100%);
     transition: all .5s;
   }
   &__content {
     width: 100%;
-    padding: 10px 120px;
+    padding: 55px 120px;
   }
   &_sidebar_on {
     padding-left: 350px;

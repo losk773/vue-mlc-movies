@@ -22,17 +22,26 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header {
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  transform: translateY(0);
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 25px;
   height: 55px;
   background-color: #a92929;
+  transition: all .5s;
   &__thumb {
     max-width: 220px;
   }
   &__logo {
     max-width: 100%;
+  }
+  &_close {
+    transform: translateY(-55px);
   }
 }
 .account {
