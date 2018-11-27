@@ -1,7 +1,7 @@
 <template>
   <div class="authorization">
     <div class="authorization__box">
-      <img src="../assets/logo.png" class="authorization__logo" alt="My lovely movie">
+      <img src="../../static/logo.png" class="authorization__logo" alt="My lovely movie">
       <login-form></login-form>
     </div>
   </div>  
@@ -20,7 +20,7 @@ export default {
 .authorization {
   position: relative;
   height: 100vh;
-  background: url(../assets/cover.jpg) center center no-repeat;
+  background: url(../../static/cover.jpg) center center no-repeat;
   background-size: cover;
 
   &__box {
