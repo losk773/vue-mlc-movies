@@ -5,6 +5,7 @@
   "author": "losk7 <losk773@gmail.com>",
   "license": "MIT",
   "private": true,
+  "homepage": "https://github.com/losk773/vue-mlc-movies",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
