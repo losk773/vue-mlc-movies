@@ -10,7 +10,7 @@ import Welcome from '../components/Welcome';
 import Movie from '../components/Movie';
 import MovieList from '../components/MovieList';
 
-const isAuth = (to, from, next) => {
+/* const isAuth = (to, from, next) => {
   if (store.getters['auth/isAuthorized']) {
     next();
     return;
@@ -24,22 +24,22 @@ const isNotAuth = (to, from, next) => {
     return;
   }
   next('/home');
-};
+}; */
 
 const routes = [
   { 
     path: '/', 
     redirect: '/home'
   },
-  {
-    path: '/login',
-    component: Login,
-    beforeEnter: isNotAuth
-  },
+  // {
+  //   path: '/login',
+  //   component: Login,
+  //   beforeEnter: isNotAuth
+  // },
   {
     path: '/home',
     component: Home,
-    beforeEnter: isAuth,
+    //beforeEnter: isAuth,
     children: [
       {
         path: '/',
