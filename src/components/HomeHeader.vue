@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header__thumb">
       <router-link :to='"/home"'>
-        <img src="/public/images/logo_white.png" class="header__logo" alt="My lovely menu">
+        <img src="../assets/logo_white.png" class="header__logo" alt="My lovely menu">
       </router-link>
     </div>
     <div class="account">

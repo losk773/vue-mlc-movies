@@ -28,7 +28,7 @@ const isNotAuth = (to, from, next) => {
 
 const routes = [
   { 
-    path: '*', 
+    path: '/', 
     redirect: '/home'
   },
   {
